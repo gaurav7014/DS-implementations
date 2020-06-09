@@ -1,0 +1,112 @@
+#include<bits/stdc++.h>
+#include<iostream>
+#include<string>
+using namespace std;
+
+class STACK
+{
+    private:
+        int top;
+        int a[5];
+
+    public:
+
+        STACK()
+        {
+            top=-1;
+
+            for(int i=0;i<5;i++)
+            {
+                a[i]=0;
+            }
+        }
+
+        bool isempty()
+        {
+            if(top==-1)
+                return true;
+            else
+                return false;
+        }
+
+        bool isfull()
+        {
+            if(top==5-1)
+                return true;
+            else
+                return false;
+        }
+
+        void push(int item)
+        {
+            if(isfull())
+            {
+                cout<<"stack full";
+
+            }
+            else
+            {
+                top++;
+                a[top]=item;
+            }
+        }
+       int pop()
+        {
+            if(isempty())
+            {
+                cout<<"empty stack"<<"\n";
+            }
+            else
+            {
+                int poped=a[top];
+                a[top]=0;
+                top--;
+                return poped;
+            }
+        }
+
+        void show()
+        {
+          for(int i=top;i>=0;i--)
+          {
+              cout<<a[i]<<endl;
+          }
+        }
+
+};
+
+int main()
+{
+    STACK stk;
+    int option,value,poped;
+
+    do
+    {
+        cout<<"1. for push"<<endl;
+        cout<<"2. for pop"<<endl;
+        cout<<"3. for show"<<endl;
+        cin>>option;
+
+
+    if(option==1)
+    {
+        cout<<"enter the value: ";
+        cin>>value;
+        stk.push(value);
+    }
+    else if(option==2)
+    {
+        poped=stk.pop();
+        cout<<"the poped value is : "<<poped<<endl;
+    }
+    else if(option==3)
+    {
+        stk.show();
+    }
+
+
+    }while(option!=0);
+
+
+    return 0;
+}
