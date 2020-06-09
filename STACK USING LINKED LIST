@@ -1,0 +1,76 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct NODE
+{
+    int data;
+    struct NODE *next;
+};
+typedef struct NODE node;
+
+node *top=NULL;
+int count=0;
+
+void push()
+{
+    int value;
+    printf("enter the value to be pushed : ");
+    scanf("%d",&value);
+    node* stacknode=(node*)malloc(sizeof(node));
+    stacknode->data=value;
+    if(top==NULL)
+    {
+        stacknode->next=NULL;
+        top=stacknode;
+    }
+    else
+    {
+        stacknode->next=top;
+        top=stacknode;
+    }
+    count++;
+
+}
+
+void pop()
+{
+    if(top==NULL)
+    {
+        printf("stack empty\n");
+    }
+    else
+    {
+        printf("th poped value is %d\n",top->data);
+        top=top->next;
+        count--;
+    }
+}
+void display()
+{
+    for(int i=0;i<count;i++)
+    {
+        printf("%d ",top->data);
+        top=top->next;
+    }
+}
+
+
+int main()
+{
+    while(1){
+    int o;
+    printf("enter the o-ptions");
+    scanf("%d",&o);
+    switch(o)
+    {
+        case 1: push();
+                break;
+        case 2: pop();
+                break;
+        case 3: display();
+                break;
+
+    }}
+    return 0;
+
+}
