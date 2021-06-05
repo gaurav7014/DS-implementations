@@ -1,0 +1,80 @@
+class Node:
+    def __init__(self, value,cost):
+        self.value=value
+        self.cost=cost
+        self.next=None
+
+class Graph:
+
+    def __init__(self, vertex):
+        self.vertex=vertex
+        self.adj_matrix = [[-1]*vertex for i in range(vertex)]
+        self.adj_list = [None]*vertex
+        self.dfsans = []
+
+    def AddInAdj_Matrix(self,source,dest,cost):
+        self.adj_matrix[source][dest]=cost
+        # self.adj_matrix[dest][source]=cost if undirected
+        
+
+    def AddInAdj_List(self,source,dest,cost):
+        new_node = Node(dest,cost)
+        new_node.next=self.adj_list[source]
+        self.adj_list[source]=new_node   
+        # vice versa if adj_list is undirected
+
+    def print(self):
+        #printing through matrix
+        for i in range(self.vertex):
+            for j in range(self.vertex):
+                if self.adj_matrix[i][j]!=-1:
+                    print(f"edge is from {i} to {j} and cost is {self.adj_matrix[i][j]}")
+                    print()
+
+        #printing through list
+        for i in range(self.vertex):
+            if self.adj_list[i] is not None:
+                print(f"the edge is from {i}", end=' ')
+                temp=self.adj_list[i]
+                while(temp):
+                    print(f" to {temp.value} and cost is {temp.cost}")
+                    temp=temp.next
+
+    def DFSutil(node,visited):
+        visited[node]=1
+        self.dfsans.append(node)
+        for i in self.adj_list[node]:
+            if visited[i.value]==-1:
+                self.DFSutil(i.value ,visited)
+        
+
+    def DFS(self):
+        visited=[-1]*self.vertex
+        for i in range(self.vertex):
+            if visited[i]==-1:
+                self.DFSutil( i , visited)
+        
+        print(self.dfsans)
+
+
+
+if __name__ == "__main__":
+    V = 5
+
+    # Create adj_list and edges
+    graph = Graph(V)
+    graph.AddInAdj_Matrix(0, 1,4)
+    graph.AddInAdj_Matrix(2, 3,5)
+    graph.AddInAdj_Matrix(4, 3,6)
+    graph.AddInAdj_Matrix(1, 2,52)
+
+
+    graph.AddInAdj_List(0, 1,4)
+    graph.AddInAdj_List(2, 3,5)
+    graph.AddInAdj_List(4, 3,6)
+    graph.AddInAdj_List(1, 2,52)
+
+    graph.print()
+
+    graph.DFS()
+
